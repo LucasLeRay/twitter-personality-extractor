@@ -1,4 +1,5 @@
 import os
+from types import List
 
 import tweepy as tw
 
@@ -8,7 +9,7 @@ CONSUMER_KEY = os.getenv("TWITTER_CONSUMER_KEY")
 CONSUMER_SECRET = os.getenv("TWITTER_CONSUMER_SECRET")
 
 
-def search_tweet_query(term):
+def search_tweet_query(term: List[str]) -> str:
     query = " OR ".join(term)
     return f"{query} -filter:retweets"
 
