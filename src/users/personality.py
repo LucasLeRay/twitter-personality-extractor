@@ -5,12 +5,11 @@ import pandas as pd
 from src.mbti import mbti
 from src.schemas import User
 
-TMP_PERSONALITY_COL = "tmp_personality"
+TMP_TYPE_COL = "tmp_mbti_type"
 
 
 def _mbti_from_text(text: str) -> str:
-    possible_types = mbti.types
-    mentions = [p for p in possible_types if p.lower() in text.lower()]
+    mentions = [p for p in mbti.types if p.lower() in text.lower()]
     # When several personalities are present, we can't choose
     if len(mentions) > 1 or len(mentions) == 0:
         return None
@@ -26,16 +25,16 @@ def _mbti_from_user(user: pd.DataFrame, *, bio_only: bool) -> pd.DataFrame:
     return None if bio_only else _mbti_from_text(origin_tweet)
 
 
-def _get_axis_col(users: pd.DataFrame, *, axis_initial: str):
-    return users[TMP_PERSONALITY_COL].str.contains(axis_initial)
+def _add_axis_cols(users: pd.DataFrame):
+    for axis in mbti.axis:
+        users[axis.name] = users[TMP_TYPE_COL].str.contains(axis.initial)
+    return users
 
 
 def add_personality(users: pd.DataFrame, *, bio_only: bool) -> pd.DataFrame:
     get_personality = partial(_mbti_from_user, bio_only=bio_only)
 
-    users[TMP_PERSONALITY_COL] = users.apply(get_personality, axis=1)
+    users[TMP_TYPE_COL] = users.apply(get_personality, axis=1)
+    users = _add_axis_cols(users)
 
-    for axis in mbti.axis:
-        users[axis.name] = _get_axis_col(users, axis_initial=axis.initial)
-
-    return users.drop(columns=[TMP_PERSONALITY_COL])
+    return users.drop(columns=[TMP_TYPE_COL])
