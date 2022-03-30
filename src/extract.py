@@ -13,18 +13,18 @@ def _setup(debug):
     setup_logging(debug)
 
 
-def _get_users(count, *, lang, from_bio, debug):
+def _get_users(count, *, lang, bio_only):
     logger.info("Getting users...")
-    users = get_users(count, lang=lang, from_bio=from_bio, debug=debug)
+    users = get_users(count, lang=lang, bio_only=bio_only)
 
     logger.info(f"Extracted {len(users)} users")
     return users
 
 
-def _get_tweets(count, *, users, debug):
+def _get_tweets(count, *, users):
     logger.info("Getting tweets...")
     user_indexes = users.index
-    tweets = get_tweets(count, users_indexes=user_indexes, debug=debug)
+    tweets = get_tweets(count, users_indexes=user_indexes)
 
     logger.info(f"Extracted {len(tweets)} tweets")
     return tweets
@@ -38,11 +38,11 @@ def _store_data(*, users, tweets):
     io.store(tweets, path=directories.tweets_output)
 
 
-def extract(*, lang, user_count, tweet_count, from_bio, debug):
+def extract(*, lang, user_count, tweet_count, bio_only, debug):
     _setup(debug)
     logger.info("Running extractor...")
 
-    users = _get_users(user_count, lang=lang, from_bio=from_bio, debug=debug)
+    users = _get_users(user_count, lang=lang, bio_only=bio_only)
     tweets = _get_tweets(tweet_count, users=users)
 
     _store_data(users=users, tweets=tweets)

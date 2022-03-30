@@ -1,5 +1,5 @@
 import os
-from types import List
+from typing import List
 
 import tweepy as tw
 

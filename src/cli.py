@@ -10,7 +10,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--lang", default=DEFAULT_LANGUAGE)
 parser.add_argument("--user-count", default=DEFAULT_USER_COUNT, type=int)
 parser.add_argument("--tweet-count", default=DEFAULT_TWEET_COUNT, type=int)
-parser.add_argument("--from-bio", action="store_true")
+parser.add_argument("--bio-only", action="store_true")
 parser.add_argument("--debug", action="store_true")
 
 

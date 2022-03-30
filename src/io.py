@@ -1,5 +1,5 @@
 from pathlib import Path
-from types import Union
+from typing import Union
 
 import pandas as pd
 
