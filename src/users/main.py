@@ -18,3 +18,5 @@ def main(count, *, lang, bio_only=False):
     logger.debug("Filtering users")
     users = filter(users)
     logger.debug(f"Remaining users: {len(users)}")
+
+    return users
