@@ -7,7 +7,6 @@ class User(StrEnum):
     BIO = "bio"
     ORIGIN_TWEET_ID = "origin_tweet_id"
     ORIGIN_TWEET_CONTENT = "origin_tweet_content"
-    FROM_DESCRIPTION = "from_description"
     STATUSES_COUNT = "statuses_count"
     FOLLOWERS_COUNT = "followers_count"
     FOLLOWING_COUNT = "following_count"
