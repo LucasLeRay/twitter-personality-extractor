@@ -23,8 +23,7 @@ def _get_users(count, *, lang, bio_only):
 
 def _get_tweets(count, *, users):
     logger.info("Getting tweets...")
-    user_indexes = users.index
-    tweets = get_tweets(count, users_indexes=user_indexes)
+    tweets = get_tweets(count, users_ids=users.index)
 
     logger.info(f"Extracted {len(tweets)} tweets")
     return tweets
