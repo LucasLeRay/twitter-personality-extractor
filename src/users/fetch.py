@@ -1,5 +1,4 @@
 import pandas as pd
-
 from tweepy import Cursor, Tweet
 
 from src import twitter_api
