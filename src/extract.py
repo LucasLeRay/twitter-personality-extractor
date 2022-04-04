@@ -1,3 +1,4 @@
+from datetime import datetime
 import logging
 
 from src.directories import directories
@@ -7,6 +8,8 @@ from src.tweets import get as get_tweets
 from src import io
 
 logger = logging.getLogger(__name__)
+
+FILES_NAME = datetime.now().strftime("%m-%d-%Y-%H:%M:%S") + ".csv"
 
 
 def _setup(debug):
@@ -31,10 +34,11 @@ def _get_tweets(count, *, users):
 
 def _store_data(*, users, tweets):
     logger.info("Storing users...")
-    io.store(users, path=directories.users_output)
+    io.store(users, path=directories.users_output / FILES_NAME)
 
-    logger.info("Storing tweets...")
-    io.store(tweets, path=directories.tweets_output)
+    if tweets is not None:
+        logger.info("Storing tweets...")
+        io.store(tweets, path=directories.tweets_output / FILES_NAME)
 
 
 def extract(*, lang, user_count, tweet_count, bio_only, debug):
@@ -42,7 +46,7 @@ def extract(*, lang, user_count, tweet_count, bio_only, debug):
     logger.info("Running extractor...")
 
     users = _get_users(user_count, lang=lang, bio_only=bio_only)
-    tweets = _get_tweets(tweet_count, users=users)
+    tweets = _get_tweets(tweet_count, users=users) if tweet_count > 0 else None
 
     _store_data(users=users, tweets=tweets)
 
