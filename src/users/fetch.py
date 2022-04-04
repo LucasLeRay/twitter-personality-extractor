@@ -12,14 +12,15 @@ def _search_cursor(*, count: int, lang: str):
         client.search_tweets,
         q=twitter_api.search_tweet_query(mbti.types),
         lang=lang,
+        tweet_mode="extended",
     ).items(count)
 
 
 def _format_user(tweet: Tweet):
     return {
-        User.BIO: tweet.user.description,
+        User.BIO: tweet.user.description.replace("\n", " "),
         User.ORIGIN_TWEET_ID: tweet.id,
-        User.ORIGIN_TWEET_CONTENT: tweet.text,
+        User.ORIGIN_TWEET_CONTENT: tweet.full_text.replace("\n", " "),
         User.STATUSES_COUNT: tweet.user.statuses_count,
         User.FOLLOWERS_COUNT: tweet.user.followers_count,
         User.FOLLOWING_COUNT: tweet.user.friends_count,
