@@ -17,8 +17,8 @@ class User(StrEnum):
     JUDGING = mbti.JUDGING
 
 
-class TweetCol(StrEnum):
-    ID = "tweet_id"
+class Tweet(StrEnum):
+    ID = "id"
     USER_ID = "user_id"
     TEXT = "text"
     LANG = "lang"
