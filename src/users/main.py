@@ -8,7 +8,7 @@ logger = logging.getLogger(__name__)
 
 
 def main(count, *, lang, bio_only=False):
-    logger.debug("Fetching users...")
+    logger.debug(f"Fetching {count} users...")
     users = fetch_users(count, lang=lang)
     logger.debug(f"Fetched {len(users)} users.")
 
