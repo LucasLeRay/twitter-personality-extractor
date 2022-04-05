@@ -54,6 +54,7 @@ def _format_tweet(tweet: APITweet):
         Tweet.ID: status.id_str,
         Tweet.USER_ID: status.user.id,
         Tweet.TEXT: tokenize_tweet_entities(status.full_text).replace("\n", " "),  # noqa E501
+        Tweet.LANG: status.lang,
         Tweet.LIKE_COUNT: status.favorite_count,
         Tweet.RETWEET_COUNT: status.retweet_count,
         Tweet.HASHTAGS_COUNT: len(entities["hashtags"]) if "hashtags" in entities else 0,  # noqa E501
