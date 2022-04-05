@@ -77,6 +77,9 @@ def fetch(count: int, *, users_ids: List[str]):
     flatten = chain(*fetched)
     formatted = [_format_tweet(tweet) for tweet in flatten]
 
-    tweets_df = pd.DataFrame(formatted).set_index(Tweet.ID)
+    tweets_df = pd.DataFrame(formatted)
 
-    return tweets_df
+    if tweets_df.empty:
+        return tweets_df
+    else:
+        return tweets_df.set_index(Tweet.ID)
