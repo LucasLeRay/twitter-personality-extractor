@@ -15,7 +15,7 @@ FETCH_LANG = "en"
 def tweets():
     tweet = SimpleNamespace(
       id="123abc",
-      text="I am ENTJ omg :o",
+      full_text="I am ENTJ omg :o",
       user=SimpleNamespace(
         id="456def",
         description="I am Lucas ;)",
