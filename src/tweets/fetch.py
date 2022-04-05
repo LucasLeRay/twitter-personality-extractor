@@ -33,11 +33,9 @@ def _get_user_tweets(user_id: str, *, count: int):
     try:
         pages = [page for page in _search_cursor(count, user_id=user_id)]
         return [item for sublist in pages for item in sublist]
-    except api_errors.TweepyError as e:
+    except api_errors.Unauthorized:
         # This error is raised if user is protected
-        if "401" in str(e):
-            return []
-        raise e
+        return []
 
 
 def _format_tweet(tweet: APITweet):
