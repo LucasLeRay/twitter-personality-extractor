@@ -4,7 +4,7 @@ from .fetch import fetch as fetch_users
 from .filter import filter as filter_users
 from .personality import add_personality
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger()
 
 
 def main(count, *, lang, bio_only=False):

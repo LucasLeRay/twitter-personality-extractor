@@ -3,7 +3,7 @@ import logging
 from .fetch import fetch as fetch_tweets
 from .filter import filter as filter_tweets
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger()
 
 
 def main(count, *, users_ids):

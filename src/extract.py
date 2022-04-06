@@ -2,18 +2,17 @@ from datetime import datetime
 import logging
 
 from src.directories import directories
-from src.logging import setup as setup_logging
 from src.users import get as get_users
 from src.tweets import get as get_tweets
 from src import io
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger()
 
 FILES_NAME = datetime.now().strftime("%m-%d-%Y-%H:%M:%S") + ".csv"
 
 
 def _setup(debug):
-    setup_logging(debug)
+    logger.setLevel(logging.DEBUG if debug else logging.INFO)
 
 
 def _get_users(count, *, lang, bio_only):
