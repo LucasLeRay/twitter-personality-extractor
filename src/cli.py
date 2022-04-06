@@ -1,6 +1,7 @@
 import argparse
 
 from src.extract import extract
+from src.io import LOCAL_STORAGE
 
 DEFAULT_LANGUAGE = "en"
 DEFAULT_USER_COUNT = 100
@@ -8,6 +9,7 @@ DEFAULT_TWEET_COUNT = 0
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--lang", default=DEFAULT_LANGUAGE)
+parser.add_argument("--storage-mode", default=LOCAL_STORAGE)
 parser.add_argument("--user-count", default=DEFAULT_USER_COUNT, type=int)
 parser.add_argument("--tweet-count", default=DEFAULT_TWEET_COUNT, type=int)
 parser.add_argument("--bio-only", action="store_true")

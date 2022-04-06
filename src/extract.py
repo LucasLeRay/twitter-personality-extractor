@@ -31,22 +31,24 @@ def _get_tweets(count, *, users):
     return tweets
 
 
-def _store_data(*, users, tweets):
+def _store_data(*, users, tweets, mode):
     logger.info("Storing users...")
-    io.store(users, path=directories.users_output / FILES_NAME)
+    io.store(users, path=directories.users_output / FILES_NAME, mode=mode)
 
     if tweets is not None:
         logger.info("Storing tweets...")
-        io.store(tweets, path=directories.tweets_output / FILES_NAME)
+        io.store(
+            tweets, path=directories.tweets_output / FILES_NAME, mode=mode
+        )
 
 
-def extract(*, lang, user_count, tweet_count, bio_only, debug):
+def extract(*, lang, user_count, tweet_count, bio_only, debug, storage_mode):
     _setup(debug)
     logger.info("Running extractor...")
 
     users = _get_users(user_count, lang=lang, bio_only=bio_only)
     tweets = _get_tweets(tweet_count, users=users) if tweet_count > 0 else None
 
-    _store_data(users=users, tweets=tweets)
+    _store_data(users=users, tweets=tweets, mode=storage_mode)
 
     logger.info("Extraction completed.")

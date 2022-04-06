@@ -5,6 +5,7 @@ import pytest
 
 from src.directories import directories
 from src.extract import FILES_NAME, _store_data
+from src.io import LOCAL_STORAGE
 from src.schemas import User, Tweet
 
 
@@ -14,7 +15,7 @@ from src.schemas import User, Tweet
     [None, pd.DataFrame(columns=list(User))]
 ])
 def test_storage(tweets, users):
-    _store_data(users=users, tweets=tweets)
+    _store_data(users=users, tweets=tweets, mode=LOCAL_STORAGE)
 
     users_output_path = directories.users_output / FILES_NAME
     assert path.exists(users_output_path)

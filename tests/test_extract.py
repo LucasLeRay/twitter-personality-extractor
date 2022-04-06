@@ -4,6 +4,7 @@ import pytest
 
 from src.directories import directories
 from src.extract import FILES_NAME, extract
+from src.io import LOCAL_STORAGE
 
 USER_COUNT = 10
 
@@ -19,7 +20,8 @@ def test_extract(lang, tweet_count, bio_only):
         user_count=USER_COUNT,
         tweet_count=tweet_count,
         bio_only=bio_only,
-        debug=True
+        debug=True,
+        storage_mode=LOCAL_STORAGE,
     )
 
     users_output_path = directories.users_output / FILES_NAME
